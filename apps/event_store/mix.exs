@@ -28,7 +28,8 @@ defmodule EventStore.MixProject do
     [
       {:ecto_sql, "~> 3.5"},
       {:postgrex, "~> 0.15"},
-      {:jason, "~> 1.2"}
+      {:jason, "~> 1.2"},
+      {:observer_cli, "~> 1.6"}
     ]
   end
 end
