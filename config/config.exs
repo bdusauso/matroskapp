@@ -21,7 +21,6 @@ config :event_store_api, EventStoreApi.Endpoint,
   pubsub_server: EventStoreApi.PubSub,
   live_view: [signing_salt: "TpUl3ZeL"]
 
-import_config "pipole.exs"
 import_config "event_store.exs"
 
 # Sample configuration:
