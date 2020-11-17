@@ -107,10 +107,6 @@ defmodule Admin.Accounts do
 
   # Call EventStore API
   defp create_event(%User{} = user) do
-    body = Jason.encode!(%{name: user.name, email: user.email})
-
-    :post
-    |> Finch.build("http://localhost:4000/api/events", [], body)
-    |> Finch.request(EventStore)
+    EventStore.Events.create_event(%{name: user.name, email: user.email})
   end
 end

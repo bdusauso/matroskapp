@@ -45,7 +45,7 @@ defmodule Admin.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:finch, "~> 0.5.2"}
+      {:event_store, path: "../backend/apps/event_store"}
     ]
   end
 

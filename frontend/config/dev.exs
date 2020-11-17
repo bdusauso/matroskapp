@@ -1,5 +1,7 @@
 use Mix.Config
 
+import_config "event_store.exs"
+
 # Configure your database
 config :admin, Admin.Repo,
   username: "postgres",
