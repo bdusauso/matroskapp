@@ -14,7 +14,9 @@ defmodule Admin.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Admin.PubSub},
       # Start the Endpoint (http/https)
-      AdminWeb.Endpoint
+      AdminWeb.Endpoint,
+      # Finch HTTP client
+      {Finch, name: EventStore}
       # Start a worker by calling: Admin.Worker.start_link(arg)
       # {Admin.Worker, arg}
     ]

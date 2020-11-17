@@ -4,9 +4,7 @@ defmodule Admin.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias Admin.Repo
-
-  alias Admin.Accounts.User
+  alias Admin.{Accounts.User, Repo}
 
   @doc """
   Returns the list of users.
@@ -50,9 +48,14 @@ defmodule Admin.Accounts do
 
   """
   def create_user(attrs \\ %{}) do
-    %User{}
-    |> User.changeset(attrs)
-    |> Repo.insert()
+    {:ok, user} =
+      %User{}
+      |> User.changeset(attrs)
+      |> Repo.insert()
+
+    create_event(user)
+
+    {:ok, user}
   end
 
   @doc """
@@ -100,5 +103,14 @@ defmodule Admin.Accounts do
   """
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
+  end
+
+  # Call EventStore API
+  defp create_event(%User{} = user) do
+    body = Jason.encode!(%{name: user.name, email: user.email})
+
+    :post
+    |> Finch.build("http://localhost:4000/api/events", [], body)
+    |> Finch.request(EventStore)
   end
 end
